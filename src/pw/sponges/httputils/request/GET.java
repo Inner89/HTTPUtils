@@ -16,6 +16,8 @@ public class GET extends Request {
      * Creates the connection & gets the results.
      * @return this - builder pattern
      * @throws IOException - thrown by URL connections
+     * 
+     * TODO make most of this code part of the Request class
      */
     @Override
     public GET connect() throws IOException {
