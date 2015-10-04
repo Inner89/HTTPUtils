@@ -3,11 +3,11 @@ Util classes to simplify Java HTTP requests.
 
 This is to replace the dependency of Jsoup just for doing a simple task.
 
-### Currently supported:
+## Currently supported:
 - [GET](https://github.com/SpongyBacon/HTTPUtils/blob/master/src/pw/sponges/httputils/GET.java)
 - [POST](https://github.com/SpongyBacon/HTTPUtils/blob/master/src/pw/sponges/httputils/POST.java)
 
-### Example code:
+## Example code:
 Here are some examples of this in use.
 
 #### GET request:
