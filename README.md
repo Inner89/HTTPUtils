@@ -22,7 +22,7 @@ get.addProperty("User-Agent", "GetRequester2000");
 
 // Requesting & getting the results
 get.connect();
-GETResult results = get.getResults();
+Result results = get.getResults();
 
 // Using the results
 int responseCode = results.getCode();
@@ -30,7 +30,7 @@ String content = results.getContent();
 ```
 This can be simplified using the builder pattern implemented into the classes like this:
 ```java
-GETResult results = new GET()
+Result results = new GET()
   .setUrl("https://google.co.uk/search?q=dog%20food")
   .setSsl(true)
   .addProperty("User-Agent", "GetRequester2000")
@@ -53,7 +53,7 @@ post.setBody("a cool message");
 
 // Requesting & getting the results
 post.connect();
-POSTResult results = post.getResults();
+Result results = post.getResults();
 
 // Using the results
 int responseCode = results.getCode();
@@ -61,7 +61,7 @@ String content = results.getContent();
 ```
 This can be simplified using the builder pattern implemented into the classes like this:
 ```java
-POSTResult results = new POST()
+Result results = new POST()
   .setUrl("https://google.co.uk/search?q=dog%20food")
   .setSsl(true)
   .addProperty("User-Agent", "PostRequester2000")
