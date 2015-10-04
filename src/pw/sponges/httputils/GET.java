@@ -15,7 +15,7 @@ public class GET {
     private String url;
     private Map<String, String> properties;
 
-    private GETResult result = null;
+    private Result result = null;
 
     /**
      * No args constructor so it can be used as a builder
@@ -80,16 +80,16 @@ public class GET {
         in.close();
         con.disconnect();
 
-        result = new GETResult(code, buffer.toString());
+        result = new Result(code, buffer.toString());
 
         return this;
     }
 
     /**
-     * Returns the results from the GET request in a GETResult object.
-     * @return result - the GETResult object
+     * Returns the results from the GET request in a Result object.
+     * @return result - the Result object
      */
-    public GETResult getResult() {
+    public Result getResult() {
         return result;
     }
 
@@ -156,59 +156,6 @@ public class GET {
     public GET addProperty(String key, String value) {
         properties.put(key, value);
         return this;
-    }
-
-}
-
-class GETResult {
-
-    private final int code;
-    private final String content;
-
-    /**
-     * Constructor with only the response code.
-     * Would be used if no content was returned from the request.
-     * @param code - the request response code
-     */
-    public GETResult(int code) {
-        this.code = code;
-        this.content = null;
-    }
-
-    /**
-     * Constructor with the response code and the content from the request.
-     * @param code - the request response code
-     * @param content - the returned content from the request
-     */
-    public GETResult(int code, String content) {
-        this.code = code;
-        this.content = content;
-    }
-
-    /**
-     * Returns the response code for the request.
-     * @return code - the response code
-     */
-    public int getCode() {
-        return code;
-    }
-
-    /**
-     * Returns the content for the request.
-     * @return content - the String content
-     */
-    public String getContent() {
-        return content;
-    }
-
-    /**
-     * Boolean to check if there is content in the results.
-     * Would be used to see if any content was returned from the request,
-     * e.g. if there was an error in the request.
-     * @return boolean - if there is content in the results
-     */
-    public boolean hasContent() {
-        return content != null;
     }
 
 }

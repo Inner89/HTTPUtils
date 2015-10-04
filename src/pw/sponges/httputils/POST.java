@@ -17,7 +17,7 @@ public class POST {
     private Map<String, String> properties;
     private String body;
 
-    private POSTResult result = null;
+    private Result result = null;
 
     /**
      * No args constructor so it can be used as a builder
@@ -93,16 +93,16 @@ public class POST {
         in.close();
         con.disconnect();
 
-        result = new POSTResult(code, buffer.toString());
+        result = new Result(code, buffer.toString());
 
         return this;
     }
 
     /**
-     * Returns the results from the POST request in a POSTResult object.
-     * @return result - the POSTResult object
+     * Returns the results from the POST request in a Result object.
+     * @return result - the Result object
      */
-    public POSTResult getResult() {
+    public Result getResult() {
         return result;
     }
 
@@ -191,31 +191,3 @@ public class POST {
 
 }
 
-class POSTResult {
-
-    private final int code;
-    private final String content;
-
-    public POSTResult(int code) {
-        this.code = code;
-        this.content = null;
-    }
-
-    public POSTResult(int code, String content) {
-        this.code = code;
-        this.content = content;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public boolean hasContent() {
-        return content != null;
-    }
-
-}
