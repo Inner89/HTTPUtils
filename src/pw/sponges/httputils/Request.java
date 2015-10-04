@@ -61,7 +61,7 @@ public abstract class Request {
      * Using https?
      * @return ssl
      */
-    public boolean isSsl() {
+    public boolean isSSL() {
         return ssl;
     }
 
@@ -70,7 +70,7 @@ public abstract class Request {
      * @param ssl - boolean for using https or http
      * @return this - builder pattern
      */
-    public Request setSsl(boolean ssl) {
+    public Request setSSL(boolean ssl) {
         this.ssl = ssl;
         return this;
     }
@@ -79,7 +79,7 @@ public abstract class Request {
      * The String url that is being sent the request.
      * @return url
      */
-    public String getUrl() {
+    public String getURL() {
         return url;
     }
 
@@ -88,7 +88,7 @@ public abstract class Request {
      * @param url
      * @return this - builder pattern
      */
-    public Request setUrl(String url) {
+    public Request setURL(String url) {
         this.url = url;
         return this;
     }
