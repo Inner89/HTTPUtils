@@ -1,4 +1,7 @@
-package pw.sponges.httputils;
+package pw.sponges.httputils.request;
+
+import pw.sponges.httputils.Request;
+import pw.sponges.httputils.Result;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -10,25 +13,15 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class POST {
+public class POST extends Request {
 
-    private boolean ssl;
-    private String url;
-    private Map<String, String> properties;
-    private String body;
-
-    private Result result = null;
+    private String body = null;
 
     /**
      * No args constructor so it can be used as a builder
      */
     public POST() {
-        this.ssl = false;
-        this.url = null;
-        this.properties = new HashMap<>();
-        this.body = null;
     }
-
 
     /**
      * Constructor without header properties map.
@@ -63,6 +56,7 @@ public class POST {
      * @return this - builder pattern
      * @throws IOException - thrown by URL connections
      */
+    @Override
     public POST connect() throws IOException {
         URL url = new URL(this.url);
 
@@ -95,79 +89,6 @@ public class POST {
 
         result = new Result(code, buffer.toString());
 
-        return this;
-    }
-
-    /**
-     * Returns the results from the POST request in a Result object.
-     * @return result - the Result object
-     */
-    public Result getResult() {
-        return result;
-    }
-
-    /**
-     * Using https?
-     * @return ssl
-     */
-    public boolean isSsl() {
-        return ssl;
-    }
-
-    /**
-     * Should https be used instead of http?
-     * @param ssl - boolean for using https or http
-     * @return this - builder pattern
-     */
-    public POST setSsl(boolean ssl) {
-        this.ssl = ssl;
-        return this;
-    }
-
-    /**
-     * The String url that is being sent the request.
-     * @return url
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * Sets the url that the request is being sent to.
-     * @param url
-     * @return this - builder pattern
-     */
-    public POST setUrl(String url) {
-        this.url = url;
-        return this;
-    }
-
-    /**
-     * The headers for the request in a Map.
-     * @return properties - the headers Map
-     */
-    public Map<String, String> getProperties() {
-        return properties;
-    }
-
-    /**
-     * Sets the headers Map for the request.
-     * @param properties - the headers Map
-     * @return this - builder pattern
-     */
-    public POST setProperties(Map<String, String> properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    /**
-     * Adds a header for the request to the properties Map.
-     * @param key - the header name
-     * @param value - the header value
-     * @return this - builder pattern
-     */
-    public POST addProperty(String key, String value) {
-        properties.put(key, value);
         return this;
     }
 

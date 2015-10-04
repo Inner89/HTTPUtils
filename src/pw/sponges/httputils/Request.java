@@ -1,29 +1,26 @@
 package pw.sponges.httputils;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GET {
+/**
+ * Copyright (c) 2015 Joe Burnard ("SpongyBacon").
+ * By viewing this code, you agree to the terms
+ * in the enclosed license.txt file.
+ */
+public abstract class Request {
 
-    private boolean ssl;
-    private String url;
-    private Map<String, String> properties;
+    public boolean ssl = false;
+    public String url = null;
+    public Map<String, String> properties = null;
 
-    private Result result = null;
+    public Result result = null;
 
     /**
      * No args constructor so it can be used as a builder
      */
-    public GET() {
-        this.ssl = false;
-        this.url = null;
-        this.properties = new HashMap<>();
+    public Request() {
     }
 
     /**
@@ -32,7 +29,7 @@ public class GET {
      * @param ssl - use https?
      * @param url - the url to make the request to
      */
-    public GET(boolean ssl, String url) {
+    public Request(boolean ssl, String url) {
         this.ssl = ssl;
         this.url = url;
         this.properties = new HashMap<>();
@@ -44,46 +41,13 @@ public class GET {
      * @param url - the url to make the request to
      * @param properties - the header properties map
      */
-    public GET(boolean ssl, String url, Map<String, String> properties) {
+    public Request(boolean ssl, String url, Map<String, String> properties) {
         this.ssl = ssl;
         this.url = url;
         this.properties = properties;
     }
 
-    /**
-     * Creates the connection & gets the results.
-     * @return this - builder pattern
-     * @throws IOException - thrown by URL connections
-     */
-    public GET connect() throws IOException {
-        URL url = new URL(this.url);
-
-        HttpURLConnection con;
-
-        if (ssl) con = (HttpsURLConnection) url.openConnection();
-        else con = (HttpURLConnection) url.openConnection();
-
-        con.setRequestMethod("GET");
-        for (String key : properties.keySet()) {
-            con.setRequestProperty(key, properties.get(key));
-        }
-
-        int code = con.getResponseCode();
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        StringBuffer buffer = new StringBuffer();
-
-        String input;
-        while ((input = in.readLine()) != null) {
-            buffer.append(input);
-        }
-        in.close();
-        con.disconnect();
-
-        result = new Result(code, buffer.toString());
-
-        return this;
-    }
+    public abstract Request connect() throws IOException;
 
     /**
      * Returns the results from the GET request in a Result object.
@@ -106,7 +70,7 @@ public class GET {
      * @param ssl - boolean for using https or http
      * @return this - builder pattern
      */
-    public GET setSsl(boolean ssl) {
+    public Request setSsl(boolean ssl) {
         this.ssl = ssl;
         return this;
     }
@@ -124,7 +88,7 @@ public class GET {
      * @param url
      * @return this - builder pattern
      */
-    public GET setUrl(String url) {
+    public Request setUrl(String url) {
         this.url = url;
         return this;
     }
@@ -142,7 +106,7 @@ public class GET {
      * @param properties - the headers Map
      * @return this - builder pattern
      */
-    public GET setProperties(Map<String, String> properties) {
+    public Request setProperties(Map<String, String> properties) {
         this.properties = properties;
         return this;
     }
@@ -153,7 +117,7 @@ public class GET {
      * @param value - the header value
      * @return this - builder pattern
      */
-    public GET addProperty(String key, String value) {
+    public Request addProperty(String key, String value) {
         properties.put(key, value);
         return this;
     }
