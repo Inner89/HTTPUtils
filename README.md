@@ -71,3 +71,9 @@ POSTResult results = new POST()
   
 // Now you can use the results!
 ```
+
+## Licensing
+This project is licensed under The MIT License (MIT).
+
+![tl;dr license](http://i.imgur.com/BHIJWYh.png)
+Provided by https://tldrlegal.com/license/mit-license
