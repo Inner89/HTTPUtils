@@ -16,8 +16,8 @@ Creating a simple GET request to google, for search results on dog food.
 ```java
 // Setting up the request
 GET get = new GET();
-get.setUrl("https://google.co.uk/search?q=dog%20food");
-get.setSsl(true);
+get.setURL("https://google.co.uk/search?q=dog%20food");
+get.setSSL(true);
 get.addProperty("User-Agent", "GetRequester2000");
 
 // Requesting & getting the results
@@ -31,8 +31,8 @@ String content = results.getContent();
 This can be simplified using the builder pattern implemented into the classes like this:
 ```java
 Result results = new GET()
-  .setUrl("https://google.co.uk/search?q=dog%20food")
-  .setSsl(true)
+  .setURL("https://google.co.uk/search?q=dog%20food")
+  .setSSL(true)
   .addProperty("User-Agent", "GetRequester2000")
   .connect()
   .getResult();
@@ -46,8 +46,8 @@ Creating a simple POST request to hastebin with a cool message.
 ```java
 // Setting up the request
 POST post = new POST();
-post.setUrl("http://hastebin.com/documents");
-post.setSsl(true);
+post.setURL("http://hastebin.com/documents");
+post.setSSL(true);
 post.addProperty("User-Agent", "PostRequester2000");
 post.setBody("a cool message");
 
@@ -62,8 +62,8 @@ String content = results.getContent();
 This can be simplified using the builder pattern implemented into the classes like this:
 ```java
 Result results = new POST()
-  .setUrl("https://google.co.uk/search?q=dog%20food")
-  .setSsl(true)
+  .setURL("https://google.co.uk/search?q=dog%20food")
+  .setSSL(true)
   .addProperty("User-Agent", "PostRequester2000")
   .setBody("a cool message")
   .connect()
